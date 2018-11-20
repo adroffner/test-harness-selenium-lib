@@ -12,6 +12,22 @@ from browser_emulators.firefox.grid_session import FirefoxBrowserGridSession
 # log package name.
 log = logging.getLogger('.'.join(__name__.split('.')[:-1]))
 
+BROWSER_SESSION_CLASS = {
+    'ANDROID': None,
+    'CHROME': ChromeBrowserGridSession,
+    'EDGE': None,
+    'FIREFOX': FirefoxBrowserGridSession,
+    'HTMLUNIT': None,
+    'HTMLUNITWITHJS': None,
+    'INTERNETEXPLORER': None,
+    'IPAD': None,
+    'IPHONE': None,
+    'OPERA': None,
+    'PHANTOMJS': None,
+    'SAFARI': None,
+    'WEBKITGTK': None,
+}
+
 
 class NoBrowserFactoryError(NotImplementedError):
     """ No Browser Factory Error.
@@ -46,6 +62,7 @@ class SeleniumWebGUITestCase(unittest.TestCase):
     VERSION = None            # Browser version (None means ANY)
 
     HEADLESS = True
+    PAGE_LOAD_TIMEOUT = 20.0  # seconds
 
     LOG_VERBOSE = True
     LOG_TO_FILE = None
@@ -62,19 +79,8 @@ class SeleniumWebGUITestCase(unittest.TestCase):
         :returns: BrowserGridSession factory or None when not available
         """
 
-        browser_factory = None
-
         browser_brand = browser_brand.upper()
-        if browser_brand == 'CHROME':
-            browser_factory = ChromeBrowserGridSession
-        elif browser_brand == 'EDGE':
-            pass
-        elif browser_brand == 'FIREFOX':
-            browser_factory = FirefoxBrowserGridSession
-        elif browser_brand == 'INTERNETEXPLORER':
-            pass
-        elif browser_brand == 'SAFARI':
-            pass
+        browser_factory = BROWSER_SESSION_CLASS.get(browser_brand, None)
 
         return browser_factory
 
@@ -89,9 +95,11 @@ class SeleniumWebGUITestCase(unittest.TestCase):
         if browser_factory_class is not None:
             cls.browser_factory = browser_factory_class(
                 command_executor=cls.GRID_URL,
-                # platform=cls.PLATFORM,
-                # version=cls.VERSION,
+                platform=cls.PLATFORM,
+                browser_version=cls.VERSION,
+
                 headless=cls.HEADLESS,
+                page_load_timeout=cls.PAGE_LOAD_TIMEOUT,
 
                 log_verbose=cls.LOG_VERBOSE,
                 log_to_file=cls.LOG_TO_FILE,

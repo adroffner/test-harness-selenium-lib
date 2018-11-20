@@ -3,4 +3,4 @@
 --extra-index-url=http://roattnap03.gcsc.att.com:8100/simple/
 
 selenium>=3.141.0
-browser_emulators>=0.2b1
+browser_emulators>=0.3b1

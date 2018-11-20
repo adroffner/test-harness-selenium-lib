@@ -98,7 +98,8 @@ class FirefoxWebGUITests(SeleniumWebGUITestCase):
     def setUp(self):
         expected_desired_capabilities = {
             'browserName': 'firefox', 'marionette': True,
-            'platform': 'LINUX', 'javascriptEnabled': True,
+            'platform': 'ANY', 'version': None,
+            'javascriptEnabled': True,
             'acceptInsecureCerts': True, 'acceptSslCerts': True
         }
 
