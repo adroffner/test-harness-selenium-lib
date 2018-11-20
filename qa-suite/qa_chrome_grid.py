@@ -38,11 +38,9 @@ class QAChromeWebGUI(SeleniumWebGUITestCase):
         SITE_TITLE = 'Python'  # part of title
 
         # self.driver is the WebDriver object.
-        print("Starting browser session...")
         self.driver.get(SITE_URL)
 
-        print('Found Page: url={} title="{}"'.format(
-            self.driver.current_url, self.driver.title))
-
-        self.assertEqual(self.driver.current_url, SITE_URL)
-        self.assertIn(SITE_TITLE, self.driver.title)
+        self.assertEqual(self.driver.current_url, SITE_URL,
+                         'Opened Web page: {}'.format(SITE_URL))
+        self.assertIn(SITE_TITLE, self.driver.title,
+                      'Page Title: "{}"'.format(SITE_TITLE))

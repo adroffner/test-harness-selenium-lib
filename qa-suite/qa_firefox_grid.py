@@ -24,6 +24,8 @@ class QAFirefoxWebGUI(SeleniumWebGUITestCase):
     # Settings: Create Firefox browser with proxy access to the outside.
     BROWSER_BRAND = 'FIREFOX'
 
+    PAGE_LOAD_TIMEOUT = 2.5  # seconds
+
     ACCEPT_SSL_CERTS = False
     HTTP_PROXY_HOST = 'one.proxy.att.com'
     HTTP_PROXY_PORT = 8080
@@ -38,11 +40,9 @@ class QAFirefoxWebGUI(SeleniumWebGUITestCase):
         SITE_TITLE = 'Google'  # part of title
 
         # self.driver is the WebDriver object.
-        print("Starting browser session...")
         self.driver.get(SITE_URL)
 
-        print('Found Page: url={} title="{}"'.format(
-            self.driver.current_url, self.driver.title))
-
-        self.assertEqual(self.driver.current_url, SITE_URL)
-        self.assertIn(SITE_TITLE, self.driver.title)
+        self.assertEqual(self.driver.current_url, SITE_URL,
+                         'Opened Web page: {}'.format(SITE_URL))
+        self.assertIn(SITE_TITLE, self.driver.title,
+                      'Page Title: "{}"'.format(SITE_TITLE))
