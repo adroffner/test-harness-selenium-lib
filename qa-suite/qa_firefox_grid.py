@@ -22,7 +22,8 @@ class QAFirefoxWebGUI(SeleniumWebGUITestCase):
     GRID_URL = 'http://roattnap04.gcsc.att.com:4444/wd/hub'
 
     # Settings: Create Firefox browser with proxy access to the outside.
-    BROWSER_BRAND = 'FIREFOX'
+    BROWSER_BRAND = 'FireFox'
+    VERSION = '62.0.3'
 
     PAGE_LOAD_TIMEOUT = 2.5  # seconds
 
