@@ -20,7 +20,7 @@ setup(name='testharness_selenium',
       packages=find_packages(exclude=['docs', 'tests']),
       install_requires=[
           'selenium>=3.141.0',
-          # 'browser_emulators>=0.2b1',  # How do we point to private PyPI server?
+          'browser_emulators>=0.3b1',  # On private PyPI server; use --extra-index-url
       ],
       test_suite='nose.collector',
       # tests_require=['nose>=1.3.7', 'coverage>=4.4.1'],
