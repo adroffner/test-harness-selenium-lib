@@ -20,3 +20,17 @@ Selenium Python Bindings
 * [Selenium Python Bindings](https://selenium-python.readthedocs.io/)
 
 The *Test Analyst* must learn to write **Selenium** emulations on a **browser** object.
+
+Development Mode: Visible Browser
+---------------------------------
+
+There is a **HEADLESS = False** or _development mode_ that shows a visible Web browser.
+By default, **HEADLESS = True** and **Selenium Grid** run the WebDriver session.
+
+Install the **Web browser** and **WebDriver** binaries locally to run this visible browser.
+The table below lists some supported Web browsers, and _is subject to change_.
+
+| Browser Brand | Browser Binary (Linux) | WebDriver     |
+| ------------- | ---------------------- | ------------- |
+| Chrome        | google-chrome-stable   | chromedriver |
+| Firefox       | firefox                | geckodriver   |
