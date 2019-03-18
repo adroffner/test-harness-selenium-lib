@@ -8,4 +8,4 @@ The tests rely on a **Selenium Grid** to provide the browser emulation.
 """
 
 
-__version__ = '0.1b1'  # pragma: no cover
+__version__ = '0.2b1'  # pragma: no cover
