@@ -3,26 +3,30 @@
 The SeleniumWebGUITestCase is a helper class for QA Testing.
 We are testing it here with itself, which is confusing.
 
-Selenium Grid opens a remote browser and traverses the UI.
-There is no visible GUI shown during these QA tests.
+Selenium Non-Headless opens a local browser and traverses the UI.
+There must be a locally installed Web browser & WebDriver.
+A visible GUI shows the events during these QA tests.
 
 The example below demonstrates a Chrome browser session.
+    Web Browser: google-chrome-stable
+    WebDriver:   chromedriver
 """
 
 from testharness.selenium.testcases import SeleniumWebGUITestCase
 
+from time import sleep
+
 
 class QAChromeWebGUI(SeleniumWebGUITestCase):
-    """ QA FireFox Web GUI.
+    """ QA Chrome Web GUI.
 
     Prove that QA tests run with the Chrome Web GUI settings.
-    This sets up a remote Chrome Web Driver in a Selenium Grid.
+    This sets up a visible Firefox Web Driver in a Selenium Local session.
     """
-
-    GRID_URL = 'http://roattnap03.gcsc.att.com:4444/wd/hub'
 
     # Settings: Create Chrome browser with proxy access to the outside.
     BROWSER_BRAND = 'Chrome'
+    HEADLESS = False  # Must set False!
 
     ACCEPT_SSL_CERTS = False
     HTTP_PROXY_HOST = 'one.proxy.att.com'
@@ -39,6 +43,7 @@ class QAChromeWebGUI(SeleniumWebGUITestCase):
 
         # self.driver is the WebDriver object.
         self.driver.get(SITE_URL)
+        sleep(3)
 
         self.assertEqual(self.driver.current_url, SITE_URL,
                          'Opened Web page: {}'.format(SITE_URL))

@@ -19,11 +19,11 @@ class QAFirefoxWebGUI(SeleniumWebGUITestCase):
     This sets up a remote Firefox Web Driver in a Selenium Grid.
     """
 
-    GRID_URL = 'http://roattnap04.gcsc.att.com:4444/wd/hub'
+    GRID_URL = 'http://roattnap03.gcsc.att.com:4444/wd/hub'
 
     # Settings: Create Firefox browser with proxy access to the outside.
     BROWSER_BRAND = 'FireFox'
-    VERSION = '62.0.3'
+    VERSION = None
 
     PAGE_LOAD_TIMEOUT = 2.5  # seconds
 

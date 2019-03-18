@@ -7,16 +7,20 @@ import logging
 import unittest
 
 from browser_emulators.chrome.grid_session import ChromeBrowserGridSession
+from browser_emulators.chrome.local_session import ChromeBrowserSession
+
 from browser_emulators.firefox.grid_session import FirefoxBrowserGridSession
+from browser_emulators.firefox.local_session import FirefoxBrowserSession
 
 # log package name.
 log = logging.getLogger('.'.join(__name__.split('.')[:-1]))
 
+# BRAND Key => (HEADLESS=True, Headless=False)
 BROWSER_SESSION_CLASS = {
     'ANDROID': None,
-    'CHROME': ChromeBrowserGridSession,
+    'CHROME': (ChromeBrowserGridSession, ChromeBrowserSession),
     'EDGE': None,
-    'FIREFOX': FirefoxBrowserGridSession,
+    'FIREFOX': (FirefoxBrowserGridSession, FirefoxBrowserSession),
     'HTMLUNIT': None,
     'HTMLUNITWITHJS': None,
     'INTERNETEXPLORER': None,
@@ -76,11 +80,20 @@ class SeleniumWebGUITestCase(unittest.TestCase):
         """ Select Browser Brand Factory Class.
 
         :param str browser_brand: match BROWSER_BRAND to its class
-        :returns: BrowserGridSession factory or None when not available
+        :returns: BrowserSession factory or None when not available
         """
 
         browser_brand = browser_brand.upper()
         browser_factory = BROWSER_SESSION_CLASS.get(browser_brand, None)
+
+        if browser_factory is not None:
+            try:
+                if cls.HEADLESS:
+                    browser_factory = browser_factory[0]  # grid session
+                else:
+                    browser_factory = browser_factory[1]  # local session
+            except IndexError:
+                    browser_factory = None
 
         return browser_factory
 
